@@ -1,0 +1,57 @@
+{% load static %}
+
+
+<div class="container">
+  <div class="header" style="margin-top:10px">
+    <a href="https://devfolio.co/inout2020/"><img class='img-fluid' src="https://www.hackoff.tech/assets/img/brands/devfolio2.png"
+        alt="Center for Research in Comptuer Vision" style="max-height: 100px;"></a>
+    <a href="https://devfolio.co/inout2020/"><img class='img-fluid' src="https://assets.devfolio.co/hackathons/9d75d8a163e54e1198b4708c581694ed/assets/logo.png"
+      alt="HackInOut" style="max-height: 100px;"></a>
+    <br>
+    <h1><b>Team-DTechtives</b></h1>
+  </div>
+</div>
+
+<nav class="navbar navbar-light" style="background-color: transparent;border-bottom: solid 1px #ddd;">
+  <div class="container">
+    <!-- <div class="navbar-header  {% if request.path == '/catalog/' %} active{% endif %}">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu"
+        aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div> -->
+    <div class="collapse navbar-collapse" id="main-menu">
+      <ul class="nav navbar-nav navbar-center  nav-pills">
+        <li class="{% if request.path == '/catalog/' %} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:index' %}"
+          class="list-group-item"><b>Introduction</b></a>
+        </li>
+        <li class="{% if '/catalog/videos/' in request.path%} active{% endif %}">
+          <a class="nav-link " href="/catalog/videos/abnormal"
+            class="list-group-item"><b>Demo</b></a>
+        </li>
+        <li class="{% if request.path == '/catalog/video-upload' %} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:video-upload' %}"
+            class="list-group-item"><b>Upload Video</b></a>
+        </li>
+        <li class="{% if request.path == '/catalog/dataset'%} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:dataset' %}"
+            class="list-group-item"><b>Dataset</b></a>
+        </li>
+        <li class="{% if request.path == '/catalog/result'%} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:result' %}"
+            class="list-group-item"><b>Result</b></a>
+        </li>
+        <li class="{% if request.path == '/catalog/about' %} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:about' %}"><b>About</b></a>
+        </li>
+        <li class="{% if request.path == '/catalog/contact' %} active{% endif %}">
+          <a class="nav-link " href="{% url 'catalog:contact' %}"><b>Contact</b></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

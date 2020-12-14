@@ -1,0 +1,98 @@
+{% extends "base_generic.html" %}
+
+{% load static %}
+{% comment %} use the files in the static folder in this template. {% endcomment %}
+
+{% block title %}Video {{ video.title }}{% endblock %}
+
+{% block videos_content %}
+
+<div class='container'>
+
+
+    <div class="row">
+        <div class='col-md-12'>
+            <div class='panel panel-default'>
+                <!-- <div class='panel-heading'>
+                    <h3 class='panel-title'>Setting</h3>
+                </div> -->
+                <div class='list-group text-center'>
+                    {% csrf_token %}
+                    <div class="checkbox-inline">
+                        <span>Choose Weight:</span>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="weightName"
+                            value="{{weight32_path}}" data-segment=32 checked>
+                        <label class="custom-control-label" for="{{weight32_path}}">32 Segment</label>
+                    </div>
+                    <div class="checkbox-inline">
+                        <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="weightName"
+                            value="{{weight64_path}}" data-segment=64>
+                        <label class="custom-control-label" for="{{weight64_path}}">64 Segment</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='col-sm-5 border-right text-center'>
+        <video controls id='video-player' width="100%" height="320" onended="FunctionEnded()" onpause="FunctionPause()" onplay="FunctionPlay()">
+            <source src="{{ video.url }}" type="video/mp4">
+        </video>
+        <div class='text-center'>
+            <button type="button" class="button2" id="play-pause">
+                <img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/play-icon-18-256.png" style="height:23px;margin-bottom:2px"> Play
+            </button>
+            <button type="button" class="button2 gray" id="plot-score"><img src="https://iconsplace.com/wp-content/uploads/_icons/fff/256/png/ball-point-pen-icon-256.png" style="height:23px;margin-bottom:2px"> Plot</button>
+        </div>
+    </div>
+    <div class='col-sm-7' style="display: relative">
+        <div id="curve_chart" style="position: relative; width: 750px; height: 400px;"></div>
+    </div>
+
+    <!-- <div class='col-sm-8'>
+        <div id="video_infor">
+        Video information
+        </div>
+    </div> -->
+</div>
+
+<div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <i class="fa fa-spinner fa-spin"></i> Getting Score...
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    let scores = {% if scores %} {{ scores }} {% else %} null {% endif %};
+    const annotation = {{ annotation }};
+    const video_path = '{{video.video_path}}';
+    const isC3Dnew = {% if c3dnew %} true {% else %} false {% endif %};
+    const video_id = {% if video.id %} {{ video.id }} {% else %} null {% endif%};
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="{% static 'js/VideoFrame.min.js' %}"></script>
+<script src="{% static 'js/video_interactive.js' %}"></script>
+<script>
+function FunctionPlay(){
+    $("#play-pause").html('<img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/pause-icon-18-256.png" style="height:23px;margin-bottom:2px"/> Pause');
+}    
+function FunctionPause(){
+    $("#play-pause").html('<img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/play-icon-18-256.png" style="height:23px;margin-bottom:2px"/> Play');
+}
+function FunctionEnded(){
+    $("#play-pause").html('<img src="https://iconsplace.com/wp-content/uploads/_icons/ffffff/256/png/play-icon-18-256.png" style="height:23px;margin-bottom:2px"/> Play');
+}
+</script>
+{% endblock %}
